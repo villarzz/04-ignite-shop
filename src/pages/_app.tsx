@@ -3,7 +3,8 @@ import { AppProps } from "next/app";
 import bag from "../assets/bag.svg";
 import logoImg from "../assets/logo.svg";
 import { globalStyles } from "@/styles/global";
-import { Button, Container, Header } from "@/styles/pages/app";
+import { Container, Header } from "@/styles/pages/app";
+import { ButtonBag } from "@/styles/components/button";
 
 globalStyles();
 
@@ -12,9 +13,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Header>
         <Image src={logoImg} alt="" />
-        <Button>
+        <ButtonBag>
           <Image src={bag} alt=""></Image>
-        </Button>
+        </ButtonBag>
       </Header>
       <Container>
         <Component {...pageProps} />

@@ -5,7 +5,9 @@ import Image from "next/image";
 import { GetStaticProps } from "next";
 import { stripe } from "../lib/stripe";
 import "keen-slider/keen-slider.min.css";
+import bagWhite from "../assets/bagWhite.svg";
 import { useKeenSlider } from "keen-slider/react";
+import { ButtonBag } from "@/styles/components/button";
 import { HomeContainer, Product } from "@/styles/pages/home";
 
 interface HomeProps {
@@ -37,8 +39,15 @@ export default function Home({ products }: HomeProps) {
               <Product className="keen-slider__slide" key={product.id}>
                 <Image src={product.imageUrl} alt="" width={520} height={480} />
                 <footer>
-                  <strong>{product.name}</strong>
-                  <span>{product.price}</span>
+                  <div>
+                    <strong>{product.name}</strong>
+                    <span>{product.price}</span>
+                  </div>
+                  <div>
+                    <ButtonBag color="green">
+                      <Image src={bagWhite} alt=""></Image>
+                    </ButtonBag>
+                  </div>
                 </footer>
               </Product>
             </Link>
