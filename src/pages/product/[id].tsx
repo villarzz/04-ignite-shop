@@ -1,16 +1,13 @@
 import axios from "axios";
 import Stripe from "stripe";
+import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import { stripe } from "@/lib/stripe";
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
-import {
-  ImageContainer,
-  ProductContainer,
-  ProductDetails,
-} from "@/styles/pages/product";
-import Head from "next/head";
+import { useCart } from "@/context/cartContext";
+import { ImageContainer,ProductContainer,ProductDetails } from "@/styles/pages/product";
 
 interface ProductProps {
   product: {
@@ -24,8 +21,10 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
-  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
-    useState(false);
+  const { addToCart } = useCart();
+  const cart = useCart();
+  const { isFallback } = useRouter();
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
 
   async function handleBuyProduct() {
     try {
@@ -41,7 +40,16 @@ export default function Product({ product }: ProductProps) {
     }
   }
 
-  const { isFallback } = useRouter();
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      imageUrl: product.imageUrl,
+      price: product.price,
+      quantity: 1,
+    });
+    console.log(cart.cart);
+  };
 
   if (isFallback) {
     return <p>Carregando...</p>;
@@ -64,9 +72,9 @@ export default function Product({ product }: ProductProps) {
           <p>{product.description}</p>
 
           <button
-            onClick={handleBuyProduct}
+            onClick={handleAddToCart}
             disabled={isCreatingCheckoutSession}>
-            Comprar agora
+            Adicionar ao carrinho
           </button>
         </ProductDetails>
       </ProductContainer>
