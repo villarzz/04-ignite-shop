@@ -30,5 +30,3 @@ export const CartContainer = styled("div", {
   maxWidth: 600,
   boxShadow: "-5px 0 15px rgba(0, 0, 0, 0.5)",
 });
-
-

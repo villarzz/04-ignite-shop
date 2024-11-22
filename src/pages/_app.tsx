@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </Header>
         {isCartVisible && (
           <CartContainer>
-            <Cart />
+            <Cart onClose={() => setCartVisible(false)} />
           </CartContainer>
         )}
         <Container>
