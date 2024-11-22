@@ -22,23 +22,8 @@ interface ProductProps {
 
 export default function Product({ product }: ProductProps) {
   const { addToCart } = useCart();
-  const cart = useCart();
   const { isFallback } = useRouter();
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
-
-  async function handleBuyProduct() {
-    try {
-      const response = await axios.post("/api/checkout", {
-        priceId: product.defaultPriceId,
-      });
-
-      const { checkoutUrl } = response.data;
-      window.location.href = checkoutUrl;
-    } catch (error) {
-      setIsCreatingCheckoutSession(false);
-      alert("Erro ao comprar o produto");
-    }
-  }
 
   const handleAddToCart = () => {
     addToCart({
@@ -48,7 +33,6 @@ export default function Product({ product }: ProductProps) {
       price: product.price,
       quantity: 1,
     });
-    console.log(cart.cart);
   };
 
   if (isFallback) {
