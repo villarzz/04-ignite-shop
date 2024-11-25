@@ -1,6 +1,6 @@
 import Cart from "./cart";
+import Link from "next/link";
 import Image from "next/image";
-import Link from "next/link"; // Importa o componente Link do Next.js
 import { useState } from "react";
 import { AppProps } from "next/app";
 import bag from "../assets/bag.svg";
