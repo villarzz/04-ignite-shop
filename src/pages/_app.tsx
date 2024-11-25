@@ -1,5 +1,6 @@
 import Cart from "./cart";
 import Image from "next/image";
+import Link from "next/link"; // Importa o componente Link do Next.js
 import { useState } from "react";
 import { AppProps } from "next/app";
 import bag from "../assets/bag.svg";
@@ -14,15 +15,17 @@ globalStyles();
 export default function App({ Component, pageProps }: AppProps) {
   const [isCartVisible, setCartVisible] = useState(false);
 
-  const toggleCart = () => setCartVisible(prev => !prev);
+  const toggleCart = () => setCartVisible((prev) => !prev);
 
   return (
     <>
       <CartProvider>
         <Header>
-          <Image src={logoImg} alt="" />
+          <Link href="/" passHref>
+            <Image src={logoImg} alt="Logo da Loja" style={{ cursor: "pointer" }} />
+          </Link>
           <ButtonBag onClick={toggleCart}>
-            <Image src={bag} alt="" />
+            <Image src={bag} alt="Carrinho de Compras" />
           </ButtonBag>
         </Header>
         {isCartVisible && (

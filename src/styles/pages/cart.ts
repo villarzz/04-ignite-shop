@@ -87,6 +87,8 @@ export const CheckoutButton = styled("button", {
   marginTop: 20,
   transition: "background 0.3s",
   "&:hover": {
-    background: "$green600",
+    background: "$gray800",
+    border: "1px solid $green500",
+    transition: "background 0.3s",
   },
 });

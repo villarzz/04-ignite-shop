@@ -1,6 +1,7 @@
-import { useCart } from "@/context/cartContext";
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { CartContainer, CartTitle, CheckoutButton, CheckoutInfos, CloseButton, ItemImage, ItemsInfos, ItemsList, ListItem, Price } from "@/styles/pages/cart";
+import { useCart } from "@/context/cartContext";
+import { CartContainer, CartTitle, CheckoutButton, CheckoutInfos, CloseButton, ItemImage, ItemsInfos, ItemsList, ListItem, Price} from "@/styles/pages/cart";
 
 interface CartProps {
   onClose: () => void;
@@ -13,7 +14,9 @@ export default function Cart({ onClose }: CartProps) {
   useEffect(() => {
     const calculateTotal = () => {
       const totalValue = cart.reduce((sum, item) => {
-        const itemPrice = parseFloat(item.price.replace("R$", "").replace(",", "."));
+        const itemPrice = parseFloat(
+          item.price.replace("R$", "").replace(",", ".")
+        );
         return sum + itemPrice * item.quantity;
       }, 0);
 
@@ -22,6 +25,17 @@ export default function Cart({ onClose }: CartProps) {
 
     calculateTotal();
   }, [cart]);
+
+  const handleCheckoutSession = () => {
+    axios
+      .post("/api/checkout", { cart })
+      .then(response => {
+        window.location.href = response.data.checkoutUrl;
+      })
+      .catch(error => {
+        console.error("Erro ao iniciar a sessão de checkout:", error);
+      });
+  };  
 
   return (
     <CartContainer>
@@ -46,14 +60,15 @@ export default function Cart({ onClose }: CartProps) {
         <p style={{ marginLeft: "160px", textAlign: "right" }}>
           {cart.length} {cart.length > 1 ? "itens" : "item"}
         </p>
-        <p style={{ marginBottom: "25px", fontSize: "18px", fontWeight: "bold" }}>
+        <p style={{ marginBottom: "25px", fontSize: "18px", fontWeight: "bold"}}>
           Valor Total
         </p>
-        <p style={{ marginLeft: "120px", fontSize: "24px", fontWeight: "bold" }}>
+        <p
+          style={{ marginLeft: "120px", fontSize: "24px", fontWeight: "bold" }}>
           R$ {total.toFixed(2).replace(".", ",")}
         </p>
       </CheckoutInfos>
-      <CheckoutButton>
+      <CheckoutButton onClick={handleCheckoutSession}>
         Finalizar compra
       </CheckoutButton>
     </CartContainer>
