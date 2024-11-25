@@ -1,5 +1,9 @@
 import { styled } from "..";
 
+export const CartContainer = styled("div", {
+  paddingLeft: "3.5rem",
+});
+
 export const CloseButton = styled("button", {
   position: "absolute",
   top: "20px",
@@ -17,8 +21,9 @@ export const CloseButton = styled("button", {
 
 export const ItemsList = styled("ul", {
   listStyle: "none",
-  paddingLeft: 50,
   flexDirection: "column",
+  height: "100%",
+  maxHeight: "calc(100vh - 300px)",
 });
 
 export const ListItem = styled("li", {
@@ -60,3 +65,28 @@ export const ItemsInfos = styled("div", {
   },
 });
 
+export const Price = styled("p", {
+  fontWeight: "bold",
+});
+
+export const CheckoutInfos = styled("div", {
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
+});
+
+export const CheckoutButton = styled("button", {
+  background: "$green500",
+  border: "none",
+  width: "100%",
+  height: 60,
+  fontSize: "$lg",
+  color: "$gray100",
+  padding: "10px 20px",
+  borderRadius: 8,
+  cursor: "pointer",
+  marginTop: 20,
+  transition: "background 0.3s",
+  "&:hover": {
+    background: "$green600",
+  },
+});

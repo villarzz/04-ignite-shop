@@ -27,6 +27,6 @@ export const CartContainer = styled("div", {
   bottom: 0,
   backgroundColor: "$gray800",
   width: "100%",
-  maxWidth: 600,
+  maxWidth: 550,
   boxShadow: "-5px 0 15px rgba(0, 0, 0, 0.5)",
 });
