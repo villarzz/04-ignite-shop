@@ -26,15 +26,15 @@ export default function Success({ customerName, products }: SuccessProps) {
       <SuccessContainter>
         <h1>Compra efetuada!</h1>
         <ImageContainer>
-        {products.map(product => (
+          {products.map(product => (
             <Image
               key={product.name}
               src={product.imageUrl}
               width={120}
               height={110}
               alt={product.name}></Image>
-              ))}
-              </ImageContainer>
+          ))}
+        </ImageContainer>
         <p>
           Uhuul <strong>{customerName}</strong>, sua compra foi efetuada e já
           está a caminho da sua casa!
